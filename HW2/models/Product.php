@@ -24,7 +24,7 @@ class Product extends Model
       return 'products';
   }
 
-  public function getPrice($price) {
+  public function getPrice() {
     return $this->price;
   }
 
