@@ -2,10 +2,9 @@
 
 namespace app\services;
 
-use \app\traits\TSingletone;
-use \app\interfaces\IDb;
 use PDO;
-
+use \app\interfaces\IDb;
+use \app\traits\TSingletone;
 
 class Db implements IDb
 {
@@ -22,11 +21,10 @@ class Db implements IDb
 
     private $conn = null; /* переменная чтобы хранить соединение */
 
-
     private function getConnection()
     {
         if (is_null($this->conn)) {
-       
+
             $this->conn = new \PDO(
                 $this->prepareDnsString(),
                 $this->config['login'],
@@ -46,7 +44,8 @@ class Db implements IDb
 
     /* подготовленные SQL запросы (:id), помогают почти полсностью исключить возможность SQL инъенкция */
 
-    private function query(string $sql, array $params = []) {
+    private function query(string $sql, array $params = [])
+    {
         $pdoStatement = $this->getConnection()->prepare($sql);
         $pdoStatement->execute($params); /*выполнение запроса к базе данных c указанными параметрами */
         return $pdoStatement;
@@ -59,13 +58,13 @@ class Db implements IDb
 
     public function queryAll(string $sql, array $params = [])
     {
-        return $this->query($sql, $params)->fetchAll();        
+        return $this->query($sql, $params)->fetchAll();
     }
 
     public function execute(string $sql, array $params = [])
     {
-       $this->query($sql, $params);
-       return true;
+        $this->query($sql, $params);
+        return true;
     }
 
     private function prepareDnsString()

@@ -71,7 +71,7 @@ abstract class Model implements IModel
     public function deleteOne(int $id)
     {
         $tableName = $this->getTableName();
-        $sql = "DELETE FROM {$tableName} WHERE id = :id"; 
+        $sql = "DELETE FROM {$tableName} WHERE id = :id";
         return $this->db->queryOne($sql, [":id" => $id]);
     }
 
