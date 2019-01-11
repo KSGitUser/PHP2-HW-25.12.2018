@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+use \app\services\Db;
 
 class Product extends Model
 {
@@ -9,14 +10,17 @@ class Product extends Model
   public $description;
   public $price;
   public $vendor_id;
+  public $allProducts;
 
-  public function __construct($id = null, $name = null, $description = null, $price = null, $vendor_id = null)
+ /*  public function __construct($id = null, $name = null, $description = null, $price = null, $vendor_id = null) */
+ public function __construct($object = null)
   {
-      $this->id = $id;
-      $this->name = $name;
-      $this->description = $description;
-      $this->price = $price;
-      $this->vendor_id = $vendor_id;
+      parent::__construct();
+      $this->id = $object->id;
+      $this->name = $object->name;
+      $this->description = $object->description;
+      $this->price = $object->price;
+      $this->vendor_id = $object->vendor_id;      
   }
 
   public function getTableName() : string

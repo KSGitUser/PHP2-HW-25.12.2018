@@ -1,16 +1,23 @@
 <?php
-
 namespace app\services;
 
-class Autoloader 
+include '../config/main.php';
+
+class Autoloader
 {
-  public function loadClass($className)
-  {
-        $className = str_replace('app\\', '', $className);
-        $className = str_replace('\\',DIRECTORY_SEPARATOR, $className);
-        $filename = $_SERVER['DOCUMENT_ROOT'] . "/../{$className}.php";
-        if (file_exists($filename)) {
-            include $filename;
+
+    public $fileExtension = ".php";
+
+    public function loadClass($className)
+    {
+        $className = str_replace(['app\\', "\\"], 
+            [ROOT_DIR, DS], 
+            $className);
+        $className .= $this->fileExtension;
+        if (file_exists($className)) {
+            include $className;
+        }  else {
+            echo 'Файл не найден';
         } 
-  }
+    }
 }
