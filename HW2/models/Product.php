@@ -20,7 +20,8 @@ class Product extends Model
       $this->name = $object->name;
       $this->description = $object->description;
       $this->price = $object->price;
-      $this->vendor_id = $object->vendor_id;      
+      $this->vendor_id = $object->vendor_id; 
+      $this->allProducts = $object;     
   }
 
   public function getTableName() : string
