@@ -5,13 +5,13 @@ namespace app\interfaces;
 // интерфейс - специальный класс, включающий всебя только описание только 
 // публичных методов
 
-interface IModel
+interface IRecord
 {
-  function getOne(int $id);
+  static function getOne(int $id);
 
-  function getAll();
+  static function getAll();
 
-  function getTableName() : string;  //абстрактный метод
+  static function getTableName() : string;  //абстрактный метод
     // содержит
     // только описание, нет реализации,
     // если в классе есть хоть один абстрактный

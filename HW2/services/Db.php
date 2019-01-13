@@ -19,8 +19,10 @@ class Db implements IDb
         'charset' => 'utf8',
     ];
 
+
     private $conn = null; /* переменная чтобы хранить соединение */
 
+ 
     private function getConnection()
     {
         if (is_null($this->conn)) {
@@ -49,6 +51,19 @@ class Db implements IDb
         $pdoStatement = $this->getConnection()->prepare($sql);
         $pdoStatement->execute($params); /*выполнение запроса к базе данных c указанными параметрами */
         return $pdoStatement;
+    }
+
+    public function queryObject($sql, $params = [], $className) 
+    {
+        $pdoStatement = $this->query($sql, $params);
+        $pdoStatement->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, $className); 
+        return $pdoStatement->fetchAll();
+        
+    }
+
+    public function getLastInsertId()
+    {
+       return $this->getConnection()->lastInsertId();
     }
 
     public function queryOne(string $sql, array $params = [])
