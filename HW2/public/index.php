@@ -13,14 +13,31 @@ $digitalProduct = new DigitalProduct(2, 'цифровой товар', 'опис
 
 $weightProduct = new WeightProduct(3, 'весовой товар', 'описание товара', 100, 3, 2); */
 
-$product = Product::getOne(14);
+/* $product = Product::getOne(14);
 $product->id = 14;
 $product->name = "Автобус";
 $product->description = "мерседес";
 $product->price = 1050;
 $product->vendor_id = 2;
 
-$product->save();
+$product->save(); */
+
+$controllerName = $_GET['c'] ?: DEFAULT_CONTROLLER;
+$actionName = $_GET['a'];
+
+$controllerClass = CONTROLLER_NAMESPACE . 
+                  ucfirst($controllerName) . "Controller";
+
+var_dump($controllerClass);
+
+if (class_exists($controllerClass)) {
+  $controller = new $controllerClass();
+  $controller->runAction($actionName);
+
+  var_dump($controller);
+
+}
+
 
 
 
@@ -29,7 +46,7 @@ $product->save();
 
 /* var_dump($product); */
 /* $product->insert(); */
-var_dump($product);
+/* var_dump($product); */
  
 /* $product->delete(); 
 var_dump($product); */
