@@ -90,8 +90,6 @@ abstract class Record implements IRecord
         $sql = "UPDATE {$tableName}
                 SET {$columns}
                 WHERE id = :id;";
-        var_dump($sql);
-        var_dump($params);
         if ($columns) {
             $this->db->execute($sql, $params);
         }
