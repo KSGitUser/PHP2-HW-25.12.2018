@@ -32,11 +32,14 @@ abstract class Record implements IRecord
     {
         $tableName = static::getTableName() ;
         $sql = "SELECT * FROM {$tableName}";
-        return Db::getInstance()->queryAll($sql);
+        /* return Db::getInstance()->queryAll($sql); */
+        return Db::getInstance()->
+            queryObject($sql, [], get_called_class());
     }
 
     private function insert()
     {
+
         $tableName = static::getTableName();
 
         $params = [];

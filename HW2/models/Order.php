@@ -2,7 +2,7 @@
 
 namespace app\models;
 
-class Product extends Record
+class Order extends Record
 {
   public $id;
   public $user_id;

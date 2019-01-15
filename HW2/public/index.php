@@ -4,6 +4,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/../services/Autoloader.php';
 use \app\models\Product;
 use \app\services\Autoloader;
 use \app\services\Db;
+use \app\models\Order;
 
 spl_autoload_register([new Autoloader(), 'loadClass']);
 
@@ -21,6 +22,8 @@ $product->price = 1050;
 $product->vendor_id = 2;
 
 $product->save(); */
+/* $order = Order::getAll(); */
+
 
 $controllerName = $_GET['c'] ?: DEFAULT_CONTROLLER;
 $actionName = $_GET['a'];
@@ -28,25 +31,26 @@ $actionName = $_GET['a'];
 $controllerClass = CONTROLLER_NAMESPACE . 
                   ucfirst($controllerName) . "Controller";
 
-var_dump($controllerClass);
 
 if (class_exists($controllerClass)) {
   $controller = new $controllerClass();
   $controller->runAction($actionName);
 
-  var_dump($controller);
 
 }
 
+$product = Product::getAll();
 
 
 
 
-/* $product2->updateRecord(['id' => 6], ['name' => 'NewPlanes', 'price' => 170]); */
 
-/* var_dump($product); */
+
+
+
+
 /* $product->insert(); */
-/* var_dump($product); */
+
  
-/* $product->delete(); 
-var_dump($product); */
+/* $product->delete(); */
+
