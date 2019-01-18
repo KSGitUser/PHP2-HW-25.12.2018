@@ -11,7 +11,7 @@ abstract class Controller
     protected $action;
     protected $defaultAction = 'index';
     protected $layout =  "layouts/main";
-    protected $useLayout = true;
+    protected $useLayout = false;
     protected $renderer;
 
      /**

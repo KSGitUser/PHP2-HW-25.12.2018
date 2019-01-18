@@ -1,0 +1,19 @@
+<h1>Каталог</h1>
+<table>
+    <th>
+        <tr>
+            <td>#</td>
+            <td>наименование </td>
+            <td>описание</td>
+            <td>цена </td>
+        </tr>
+    </th>
+    {% for item in product %}
+    <tr>
+        <td>{{ item.id}} </td>
+        <td>{{ item.name}} </td>
+        <td>{{ item.description}} </td>
+        <td>{{ item.price}} </td>
+    </tr>
+    {% endfor %}
+</table>

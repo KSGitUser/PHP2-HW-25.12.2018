@@ -1,5 +1,16 @@
 {
+    "autoload": {
+        "psr-4": {
+            "app\\": "."
+        },
+        "files": [
+            "config/main.php"
+        ]
+    },
     "require": {
         "twig/twig": "^2.0"
+    },
+    "config": {
+        "optimize-autoloader": true
     }
 }

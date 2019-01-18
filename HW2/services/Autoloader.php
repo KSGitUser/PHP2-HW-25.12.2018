@@ -1,5 +1,5 @@
 <?php
-namespace app\services;
+/* namespace app\services;
 
 include '../config/main.php';
 
@@ -20,4 +20,4 @@ class Autoloader
             echo 'Файл не найден';
         } 
     }
-}
+} */

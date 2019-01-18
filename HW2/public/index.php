@@ -1,13 +1,16 @@
 <?php
 
-include $_SERVER['DOCUMENT_ROOT'] . '/../services/Autoloader.php';
+/* include $_SERVER['DOCUMENT_ROOT'] . '/../services/Autoloader.php'; */
+/* заменил автозагрузчиком из Composer */
+require_once $_SERVER['DOCUMENT_ROOT'] .'/../vendor/autoload.php';
+
 use \app\models\Product;
 use \app\services\Autoloader;
 use \app\services\Db;
 use \app\models\Order;
 use app\services\renderers\TemplateRenderer;
 
-spl_autoload_register([new Autoloader(), 'loadClass']);
+/* spl_autoload_register([new Autoloader(), 'loadClass']); */
 
 /* $product = new Product(1, 'товар', 'описание товара', 100, 3, $db);
 
@@ -33,7 +36,7 @@ $controllerClass = CONTROLLER_NAMESPACE .
 
 
 if (class_exists($controllerClass)) {
-  $controller = new $controllerClass(new TemplateRenderer);
+  $controller = new $controllerClass(new \app\services\renderers\TwigRenderer());
   $controller->runAction($actionName);
 
 
