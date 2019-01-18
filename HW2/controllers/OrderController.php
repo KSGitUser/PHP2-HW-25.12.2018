@@ -10,20 +10,34 @@ class OrderController extends Controller
       return 'order';
    }
 
-  public static function getOne($id) 
-  {
-    return Order::getOne($id);
-  }
-
   public static function getDefault() 
   {
     return "catalog";
   }
 
-  public static function getAll() 
+
+
+  public function actionIndex()
   {
-    return Order::getAll();
+      $nameOfController = static::getContollerName();
+      $nameOfTemplate = $nameOfController . 's/' . static::getDefault();
+      $product = Order::getAll();
+      echo $this->render($nameOfTemplate, [$nameOfController => $product]);
+  } /* по традиции дефолтное действие index которое будет выполнятся
+  в случае вызова контроллера без указания конкретного действия*/
+
+  public function actionCard()
+  {
+      $id = $_GET['id'];
+      $product = Order::getOne($id);
+      $nameOfController = static::getContollerName();
+      $nameOfTemplate = $nameOfController . 's/card'; 
+      echo $this->render("card", [$nameOfController => $product]);
   }
+
+
+
+
 
 
 }

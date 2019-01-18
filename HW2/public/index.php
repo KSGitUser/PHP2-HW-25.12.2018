@@ -5,6 +5,7 @@ use \app\models\Product;
 use \app\services\Autoloader;
 use \app\services\Db;
 use \app\models\Order;
+use app\services\renderers\TemplateRenderer;
 
 spl_autoload_register([new Autoloader(), 'loadClass']);
 
@@ -24,7 +25,6 @@ $product->vendor_id = 2;
 $product->save(); */
 /* $order = Order::getAll(); */
 
-
 $controllerName = $_GET['c'] ?: DEFAULT_CONTROLLER;
 $actionName = $_GET['a'];
 
@@ -33,13 +33,13 @@ $controllerClass = CONTROLLER_NAMESPACE .
 
 
 if (class_exists($controllerClass)) {
-  $controller = new $controllerClass();
+  $controller = new $controllerClass(new TemplateRenderer);
   $controller->runAction($actionName);
 
 
 }
 
-$product = Product::getAll();
+/* $product = Product::getAll(); */
 
 
 

@@ -14,9 +14,15 @@ abstract class Record implements IRecord
 
     public function __construct()
     {
-        $this->db = Db::getInstance(); // создали объект другого класса
+        $this->db = static::getDb(); // создали объект другого класса
 
     }
+
+    protected static function getDb()
+    {
+        return Db::getInstance();
+    }
+    
 
 
     /** @return static */
@@ -24,7 +30,7 @@ abstract class Record implements IRecord
     {
         $tableName = static::getTableName();
         $sql = "SELECT * FROM {$tableName} WHERE id = :id"; /* используем плейсхолдер :id, чтобы избежать sql инъекций */
-        return Db::getInstance()->
+        return static::getDb()->
             queryObject($sql, [":id" => $id], get_called_class())[0];
     }
 
@@ -32,8 +38,7 @@ abstract class Record implements IRecord
     {
         $tableName = static::getTableName() ;
         $sql = "SELECT * FROM {$tableName}";
-        /* return Db::getInstance()->queryAll($sql); */
-        return Db::getInstance()->
+        return static::getDb()->
             queryObject($sql, [], get_called_class());
     }
 

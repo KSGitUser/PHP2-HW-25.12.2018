@@ -10,19 +10,28 @@ class ProductController extends Controller
       return 'product';
    }
 
-  public static function getOne($id) 
-  {
-    return Product::getOne($id);
-  }
-
   public static function getDefault() 
   {
     return "catalog";
   }
 
-  public static function getAll() 
+  public function actionIndex()
   {
-    return Product::getAll();
+     
+      $nameOfController = static::getContollerName();
+      $nameOfTemplate = $nameOfController . 's/' . static::getDefault();
+      $product = Product::getAll();
+      echo $this->render($nameOfTemplate, [$nameOfController => $product]);
+  } /* по традиции дефолтное действие index которое будет выполнятся
+  в случае вызова контроллера без указания конкретного действия*/
+
+  public function actionCard()
+  {
+      $id = $_GET['id'];
+      $product = Product::getOne($id);
+      $nameOfController = static::getContollerName();
+      $nameOfTemplate = $nameOfController . 's/card'; 
+      echo $this->render($nameOfTemplate, [$nameOfController => $product]);
   }
 
 
