@@ -9,6 +9,7 @@ use \app\services\Autoloader;
 use \app\services\Db;
 use \app\models\Order;
 use app\services\renderers\TemplateRenderer;
+use app\services\Request;
 
 /* spl_autoload_register([new Autoloader(), 'loadClass']); */
 
@@ -28,15 +29,18 @@ $product->vendor_id = 2;
 $product->save(); */
 /* $order = Order::getAll(); */
 
-$controllerName = $_GET['c'] ?: DEFAULT_CONTROLLER;
-$actionName = $_GET['a'];
+$request = new Request();
+
+
+$controllerName = $request->getControllerName() ?: DEFAULT_CONTROLLER;
+$actionName = $request->getActionName();
 
 $controllerClass = CONTROLLER_NAMESPACE . 
                   ucfirst($controllerName) . "Controller";
 
 
 if (class_exists($controllerClass)) {
-  $controller = new $controllerClass(new \app\services\renderers\TwigRenderer());
+  $controller = new $controllerClass(new \app\services\renderers\TemplateRenderer());
   $controller->runAction($actionName);
 
 

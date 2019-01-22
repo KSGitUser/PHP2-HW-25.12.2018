@@ -11,7 +11,7 @@ abstract class Controller
     protected $action;
     protected $defaultAction = 'index';
     protected $layout =  "layouts/main";
-    protected $useLayout = false;
+    protected $useLayout = true;
     protected $renderer;
 
      /**
@@ -30,7 +30,13 @@ abstract class Controller
         $method = "action" . ucfirst($this->action);
 
         if (method_exists($this, $method)) {
-            $this->$method();
+            try {
+                $this->$method();
+            } catch (\PDOException $e) {
+                echo "Произошла ошибка в базе данных";
+            } catch (\Exception $e) {
+                echo "Какая-то ошибка!";
+            }            
         } else {
             echo "404";
         }
@@ -53,7 +59,6 @@ abstract class Controller
         
         return $this->renderer->render($template, $params);
     }
-
 
 
 }

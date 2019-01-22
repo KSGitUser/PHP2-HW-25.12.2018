@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+use app\models\repositories;
+
 class Product extends Record
 {
     public $id;
@@ -13,7 +15,6 @@ class Product extends Record
     /*  public function __construct($id = null, $name = null, $description = null, $price = null, $vendor_id = null) */
     public function __construct($id = null, $name = null, $description = null, $price = null, $vendor_id = null)
     {
-        parent::__construct();
         $this->id = $id;
         $this->name = $name;
         $this->description = $description;
@@ -21,10 +22,6 @@ class Product extends Record
         $this->vendor_id = $vendor_id;
     }
 
-    public static function getTableName(): string
-    {
-        return 'products';
-    }
 
     public function getPrice()
     {

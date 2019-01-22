@@ -7,13 +7,18 @@ use app\interfaces\IRenderer;
 class TwigRenderer implements IRenderer
 {
 
+  protected $templater;
+
+
+  public function __construct() {
+    $this->templater = new \Twig_Environment(new \Twig_Loader_Filesystem( $_SERVER['DOCUMENT_ROOT'] . '/../views'));    
+  }
+
     public function render($template, $params = [])
     {
       extract($params);
       $template =  $template . '.twig';
-      $loader = new \Twig_Loader_Filesystem( $_SERVER['DOCUMENT_ROOT'] . '/../views');
-      $twig = new \Twig_Environment($loader);
-      return $twig->render($template, ['product' => $product]);
+      return $this->templater->render($template, ['product' => $product]);
     }
 
 }
