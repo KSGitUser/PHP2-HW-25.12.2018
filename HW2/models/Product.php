@@ -28,4 +28,5 @@ class Product extends Record
         return $this->price;
     }
 
+
 }

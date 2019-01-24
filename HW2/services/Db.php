@@ -57,8 +57,7 @@ class Db implements IDb
     {
         $pdoStatement = $this->query($sql, $params);
         $pdoStatement->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, $className); 
-        return $pdoStatement->fetchAll();
-        
+        return $pdoStatement->fetchAll();        
     }
 
     public function getLastInsertId()

@@ -2,10 +2,12 @@
 namespace app\controllers;
 
 use app\models\Order;
+use app\services\Request;
+use app\models\repositories\OrderRepository;
 
 class OrderController extends Controller
 {
-  public static function getContollerName() : string
+  public function getControllerName() : string
    {
       return 'order';
    }
@@ -19,20 +21,21 @@ class OrderController extends Controller
 
   public function actionIndex()
   {
-      $nameOfController = static::getContollerName();
+      $nameOfController = $this->getControllerName();
       $nameOfTemplate = $nameOfController . 's/' . static::getDefault();
-      $product = Order::getAll();
+      $product = (new OrderRepository())->getAll();
       echo $this->render($nameOfTemplate, [$nameOfController => $product]);
   } /* по традиции дефолтное действие index которое будет выполнятся
   в случае вызова контроллера без указания конкретного действия*/
 
   public function actionCard()
   {
-      $id = $_GET['id'];
-      $product = Order::getOne($id);
-      $nameOfController = static::getContollerName();
-      $nameOfTemplate = $nameOfController . 's/card'; 
-      echo $this->render("card", [$nameOfController => $product]);
+      $id = (new Request())->getParams()['id'];
+      $product = (new OrderRepository())->getOne($id);
+      $nameOfController = (new Request())->getControllerName();
+      $actionName = (new Request())->getActionName();
+      $nameOfTemplate = $nameOfController . 's/' . $actionName; 
+      echo $this->render($nameOfTemplate, [$nameOfController => $product]);
   }
 
 

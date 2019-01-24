@@ -16,21 +16,22 @@ class Request
     public function __construct()
     {
         $this->requestString = $_SERVER['REQUEST_URI'];
-       /*  var_dump($this->requestString); */
         $this->parseRequest();
       
     }
 
     public function parseRequest()
     {
+      preg_match_all($this->pattern, $this->requestString, $matches);
+          
       if(preg_match_all($this->pattern, $this->requestString, $matches))
         { 
           $this->controllerName = $matches['controller'][0];
           $this->actionName = $matches['action'][0];
           $this->params = $_REQUEST;
-        } else {
+        }/*  else {
           throw new \Exception('Error URL');
-        }
+        } */
 
     }
 

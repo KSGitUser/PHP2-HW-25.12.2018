@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 /* include $_SERVER['DOCUMENT_ROOT'] . '/../services/Autoloader.php'; */
 /* заменил автозагрузчиком из Composer */
@@ -10,6 +11,7 @@ use \app\services\Db;
 use \app\models\Order;
 use app\services\renderers\TemplateRenderer;
 use app\services\Request;
+use \app\models\Basket;
 
 /* spl_autoload_register([new Autoloader(), 'loadClass']); */
 
@@ -45,6 +47,15 @@ if (class_exists($controllerClass)) {
 
 
 }
+
+
+var_dump($request->getActionName());
+$params = $request->getParams();
+$basket = new Basket();
+$basket->addToSession($params['productId'], $params['quantity']);
+$basket->getProductsWithAmmount();
+
+
 
 /* $product = Product::getAll(); */
 
