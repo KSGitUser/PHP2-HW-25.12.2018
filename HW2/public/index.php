@@ -49,7 +49,6 @@ if (class_exists($controllerClass)) {
 }
 
 
-var_dump($request->getActionName());
 $params = $request->getParams();
 $basket = new Basket();
 $basket->addToSession($params['productId'], $params['quantity']);
