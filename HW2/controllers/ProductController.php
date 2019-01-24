@@ -36,5 +36,7 @@ class ProductController extends Controller
       $nameOfTemplate = $nameOfController . 's/' . $actionName; 
       echo $this->render($nameOfTemplate, [$nameOfController => $product]);
   }
+
+
       
 }

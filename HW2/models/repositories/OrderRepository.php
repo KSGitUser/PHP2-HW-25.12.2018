@@ -16,4 +16,6 @@ class OrderRepository extends Repository
     return Order::class;
   } 
 
+  public
+
 }

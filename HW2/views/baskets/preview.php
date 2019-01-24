@@ -18,3 +18,4 @@
 
 </table>
 <a href="/product/"> Каталог</a>
+<a href="/order/"> Оформить заказ </a>
