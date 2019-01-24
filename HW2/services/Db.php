@@ -8,23 +8,30 @@ use \app\traits\TSingletone;
 
 class Db implements IDb
 {
-    use TSingletone; /* подмешиваем трейтс, сюда будет помещен код из трейтс, этот код становится частью класса */
+    /* use TSingletone;  *//* подмешиваем трейтс, сюда будет помещен код из трейтс, этот код становится частью класса */
 
-    private $config = [
-        'driver' => 'mysql',
-        'host' => 'localhost',
-        'login' => 'root',
-        'password' => '',
-        'database' => 'lovely',
-        'charset' => 'utf8',
-    ];
-
+    private $config;
 
     private $conn = null; /* переменная чтобы хранить соединение */
+
+    public function __construct($driver, $host, $login, $password, $database, $charset)
+    {
+        $this->config = [
+            'driver' => $driver,
+            'host' => $host,
+            'login' => $login,
+            'password' => $password,
+            'database' => $database,
+            'charset' => $charset
+        ];
+        
+    }
 
  
     private function getConnection()
     {
+
+        
         if (is_null($this->conn)) {
 
             $this->conn = new \PDO(

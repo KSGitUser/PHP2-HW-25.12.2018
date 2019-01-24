@@ -3,6 +3,7 @@ namespace app\models\repositories;
 
 use app\interfaces\IRepository;
 use app\services\Db;
+use app\base\App;
 
 
 abstract class Repository implements IRepository
@@ -19,7 +20,7 @@ abstract class Repository implements IRepository
 
   protected function getDb()
   {
-      $db =  Db::getInstance();
+      $db =  App::call()->db;
       if (empty($db)) {
           throw new \Exception("Не удалось создать подключение!"); 
           //выкидываем ошибку если не удалось подключиться к базе данных

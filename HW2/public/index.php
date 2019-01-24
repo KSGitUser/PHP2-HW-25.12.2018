@@ -4,14 +4,11 @@ session_start();
 /* include $_SERVER['DOCUMENT_ROOT'] . '/../services/Autoloader.php'; */
 /* заменил автозагрузчиком из Composer */
 require_once $_SERVER['DOCUMENT_ROOT'] .'/../vendor/autoload.php';
+$config = include '../config/main.php';
 
-use \app\models\Product;
-use \app\services\Autoloader;
-use \app\services\Db;
-use \app\models\Order;
-use app\services\renderers\TemplateRenderer;
-use app\services\Request;
-use \app\models\Basket;
+
+
+
 
 /* spl_autoload_register([new Autoloader(), 'loadClass']); */
 
@@ -31,30 +28,10 @@ $product->vendor_id = 2;
 $product->save(); */
 /* $order = Order::getAll(); */
 
-$request = new Request();
-
-
-$controllerName = $request->getControllerName() ?: DEFAULT_CONTROLLER;
-$actionName = $request->getActionName();
-
-$controllerClass = CONTROLLER_NAMESPACE . 
-                  ucfirst($controllerName) . "Controller";
-
-
-if (class_exists($controllerClass)) {
-  $controller = new $controllerClass(new \app\services\renderers\TemplateRenderer());
-  $controller->runAction($actionName);
-
-
-}
-
-
-$params = $request->getParams();
-$basket = new Basket();
-$basket->addToSession($params['productId'], $params['quantity']);
 
 
 
+\app\base\App::call()->run($config);
 
 
 /* $product = Product::getAll(); */
