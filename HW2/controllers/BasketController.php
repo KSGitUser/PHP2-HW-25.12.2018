@@ -5,6 +5,7 @@ use app\models\Basket;
 use app\models\repositories;
 use app\models\repositories\BasketRepository;
 use app\services\Request;
+use app\base\App;
 
 class BasketController extends Controller
 {
@@ -22,7 +23,7 @@ class BasketController extends Controller
   {
       $nameOfController = $this->getControllerName();
       $nameOfTemplate = $nameOfController . 's/' . static::getDefault();
-      $product = (new BasketRepository())->getAll();
+      $product = App::call()->basketRepository->getAll();
       echo $this->render($nameOfTemplate, [$nameOfController => $product]);
   } /* по традиции дефолтное действие index которое будет выполнятся
   в случае вызова контроллера без указания конкретного действия*/
@@ -31,7 +32,7 @@ class BasketController extends Controller
   {
     $nameOfController = $this->getControllerName();
     $nameOfTemplate = $nameOfController . 's/preview';
-    $basket = (new Basket())->getProductsWithAmmount();
+    $basket = App::call()->basket->getProductsWithAmmount();
     echo $this->render($nameOfTemplate, [$nameOfController => $basket]);
 }
 

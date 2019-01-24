@@ -5,6 +5,7 @@ use app\models\Product;
 use app\models\repositories;
 use app\models\repositories\ProductRepository;
 use app\services\Request;
+use app\base\App;
 
 class ProductController extends Controller
 {
@@ -22,17 +23,17 @@ class ProductController extends Controller
   {
       $nameOfController = $this->getControllerName();
       $nameOfTemplate = $nameOfController . 's/' . static::getDefault();
-      $product = (new ProductRepository())->getAll();
+      $product = App::call()->productRepository->getAll();
       echo $this->render($nameOfTemplate, [$nameOfController => $product]);
   } /* по традиции дефолтное действие index которое будет выполнятся
   в случае вызова контроллера без указания конкретного действия*/
 
   public function actionCard()
   {
-      $id =(new Request())->getParams()['id'];
-      $product = (new ProductRepository())->getOne($id);
-      $nameOfController = (new Request())->getControllerName();      
-      $actionName = (new Request())->getActionName(); 
+      $id =App::call()->request->getParams()['id'];
+      $product = App::call()->productRepository->getOne($id);
+      $nameOfController = App::call()->request->getControllerName();      
+      $actionName = App::call()->request->getActionName(); 
       $nameOfTemplate = $nameOfController . 's/' . $actionName; 
       echo $this->render($nameOfTemplate, [$nameOfController => $product]);
   }

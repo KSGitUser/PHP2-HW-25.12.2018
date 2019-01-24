@@ -23,17 +23,17 @@ class OrderController extends Controller
   {
       $nameOfController = $this->getControllerName();
       $nameOfTemplate = $nameOfController . 's/' . static::getDefault();
-      $product = (new OrderRepository())->getAll();
+      $product = App::call()->orderRepository->getAll();
       echo $this->render($nameOfTemplate, [$nameOfController => $product]);
   } /* по традиции дефолтное действие index которое будет выполнятся
   в случае вызова контроллера без указания конкретного действия*/
 
   public function actionCard()
   {
-      $id = (new Request())->getParams()['id'];
-      $product = (new OrderRepository())->getOne($id);
-      $nameOfController = (new Request())->getControllerName();
-      $actionName = (new Request())->getActionName();
+      $id = App::call()->request->getParams()['id'];
+      $product = App::call()->orderRepository->getOne($id);
+      $nameOfController = App::call()->request->getControllerName();
+      $actionName = App::call()->request->getActionName();
       $nameOfTemplate = $nameOfController . 's/' . $actionName; 
       echo $this->render($nameOfTemplate, [$nameOfController => $product]);
   }

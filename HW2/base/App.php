@@ -44,7 +44,7 @@ class App
         $request = App::call()->request;
 
         $params = $request->getParams();
-        $basket = new Basket();
+        $basket = App::call()->basket;
         $basket->addToSession($params['productId'], $params['quantity']);
     }
  
@@ -59,7 +59,7 @@ class App
           ucfirst($controllerName) . "Controller";
 
       if (class_exists($controllerClass)) {
-          $controller = new $controllerClass(new \app\services\renderers\TemplateRenderer());
+          $controller = new $controllerClass(App::call()->renderer);
           $controller->runAction($actionName);
       }
     }

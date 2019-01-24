@@ -5,7 +5,7 @@ namespace app\models;
 use app\models\repositories\BasketRepository;
 use app\controllers\ProductController;
 use app\models\repositories\ProductRepository;
-
+use app\base\App;
 
 class Basket
 {
@@ -32,7 +32,7 @@ class Basket
 
   public function getProductsWithAmmount() {
     $basketFromSession = $_SESSION['basket'];
-    $productController = (new ProductRepository());
+    $productController = App::call()->productRepository;
     foreach ($basketFromSession as $productId=>$quantity) {
       if  ($productController->getOne((int) $productId)) {
          $product = $productController->getOne((int) $productId);

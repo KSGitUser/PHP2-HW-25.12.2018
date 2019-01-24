@@ -20,6 +20,19 @@ return [
       ],
       'renderer' => [
         'class' => \app\services\renderers\TemplateRenderer::class
-      ]
+      ],
+      'productRepository' => [
+      'class'=> \app\models\repositories\ProductRepository::class
+      ],
+      'basket' => [
+        'class'=> \app\models\Basket::class
+      ],
+      'basketRepository' => [
+        'class'=> \app\models\repositories\BasketRepository::class
+      ],
+      'orderRepository' => [
+        'class'=> \app\models\repositories\OrderRepository::class
+      ],
+    
   ]
       ];
