@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8 ?>
+
+<phpunit bootstrap="./HW2/vendor/autoload.php">
+  <testsuites>
+    <testsuite>
+      <directory>./HW2/tests</directory>
+    </testsuite>
+  </testsuites>
+</phpunit>
